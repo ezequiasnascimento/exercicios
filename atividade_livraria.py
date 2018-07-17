@@ -32,7 +32,7 @@ class Livro(object):
         else:
             for x in range(len(self.autores)):
                   print("CPF do autor %i :"%self.autores[x])
-        
+print("testando git")
 class Autor(object):
     nome = None
     cpf = None
@@ -111,7 +111,6 @@ while True:
                 for livro in livros:
                     if autor.cpf in livro.autores and len(livro.autores) == 1:
                         livros.remove(livro)
-                        print("fui executado")
                 autores.remove(autor)
                 print("Autor removido com sucesso!")
                 break
@@ -161,11 +160,13 @@ while True:
             
         #Complementar, solicitando que o usuário informe o CPF do usuário
     elif(opcao == 5):
-        print("++exibir livro")
+        print("++exibir livro++")
         isbn = input("ISBN: ")
         for x in livros:
             if(x.isbn == isbn):
                 x.exibir()
+        else:
+            print("livro não encontrado")
 
     elif(opcao == 6):
         print("")

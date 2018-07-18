@@ -29,9 +29,11 @@ class Livro(object):
         print("Ano de lançamento", self.ano)
         if len(self.autores) == 1:
             print("CPF do Autor: ",self.autores[0])
+        elif len(self.autores) == 0:
+            print("nenhum autor encontrado")
         else:
             for x in range(len(self.autores)):
-                  print("CPF do autor %i :"%self.autores[x])
+                  print("CPF do autor ",x ," ",self.autores[x])
 print("testando git")
 class Autor(object):
     nome = None
@@ -165,11 +167,23 @@ while True:
         for x in livros:
             if(x.isbn == isbn):
                 x.exibir()
+                break       
         else:
-            print("livro não encontrado")
+                print("livro não encontrado")
+    
+                
 
     elif(opcao == 6):
-        print("")
+        print("++remover livro++")
+        isbn = input("ISBN? ")
+        for livro in livros:
+              if livro.isbn == isbn:
+                  livros.remove(livro)
+                  print("livro removido com sucesso")  
+                  break
+        else:
+              print("livro não encontrado")
+        
     elif(opcao == 7):
         print("Muito obrigado por ter utilizado o sistema!")
         break

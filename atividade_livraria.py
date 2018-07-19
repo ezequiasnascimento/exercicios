@@ -8,23 +8,32 @@
 # 6 - Analisar o código em busca de trechos duplicados e movê-los para funções
 #    visando o reúso de código
 
+class Funcionario:
+    def __init__(self,nome = '', cpf = 0 ,data_nascimento = '',salario = 0):
+        self.nome = nome
+        self.cpf = cpf
+        self.data_nascimento = data_nascimento
+        self.salario = salario
+class Cliente(Funcionario):
+    def __init__(self,nome = '', cpf = 0 ,data_nascimento = '',salario = 0,preferencias=''):
+       super().__init__(nome = '', cpf = 0 ,data_nascimento = '',salario = 0)
 
 class Livro(object):
     isbn = None
-    nome = None #titulo
+    titulo = None #titulo
     lingua = None
     ano = None
     autores = []
 
-    def __init__(self, isbn, nome = None, lingua = None, ano = None, autores = []):
+    def __init__(self, isbn, titulo = None, lingua = None, ano = None, autores = []):
         self.isbn = isbn
-        self.nome = nome
+        self.titulo = titulo
         self.lingua = lingua
         self.ano = ano
         self.autores = autores
     def exibir(self):
         print("ISBN: ",self.isbn)
-        print("Nome: ",self.nome)
+        print("titulo: ",self.titulo)
         print("Lingua: ",self.lingua)
         print("Ano de lançamento", self.ano)
         if len(self.autores) == 1:
@@ -34,7 +43,7 @@ class Livro(object):
         else:
             for x in range(len(self.autores)):
                   print("CPF do autor ",x ," ",self.autores[x])
-print("testando git")
+
 class Autor(object):
     nome = None
     cpf = None
@@ -63,7 +72,6 @@ class Autor(object):
             retorno += "\nPaís de nascimento: " + str(self.pais_nascimento)
             retorno += "\nNota biográfica: " + str(self.nota_biografica)
             retorno += "\nLivros publicados: \n"
-            
 
 autores = []
 livros = []
@@ -89,11 +97,11 @@ while True:
                 print("Autor já cadastrado")
                 break        
         else:
-            nome = input("Nome: ")
+            titulo = input("titulo: ")
             data_nascimento = input("Data nascimento: ")
             pais_nascimento = input("País de nascimento: ")
             nota_biografica = input("Nota biográfica: ")
-            autor = Autor(cpf, nome, data_nascimento, pais_nascimento, nota_biografica)
+            autor = Autor(cpf, titulo, data_nascimento, pais_nascimento, nota_biografica)
             autores.append(autor)
     elif(opcao == 2):
         print("++Exibir Autor++")

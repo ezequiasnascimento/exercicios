@@ -7,32 +7,42 @@
 #    do autor sejam removidos não houver mais nenhum autor associado ao livro
 # 6 - Analisar o código em busca de trechos duplicados e movê-los para funções
 #    visando o reúso de código
-
-class Funcionario:
+class Pessoa:
+    nome = None
+    cpf = None
+    data_nascimento = None
+    def __init__(self, cpf, nome = None, data_nascimento = None):
+        self.nome = nome
+        self.cpf = cpf
+        self.data_nascimento = data_nascimento
+class Obra:
+    titulo = None 
+    lingua = None
+    ano = None
+    autores = []
+    def __init__(self, titulo = None, lingua = None, ano = None, autores = []):
+        self.titulo = titulo
+        self.lingua = lingua
+        self.ano = ano
+        self.autores = autores
+class Funcionario(Pessoa):
     def __init__(self,nome = '', cpf = 0 ,data_nascimento = '',salario = 0):
         self.nome = nome
         self.cpf = cpf
         self.data_nascimento = data_nascimento
         self.salario = salario
-class Cliente(Funcionario):
-    def __init__(self,nome = '', cpf = 0 ,data_nascimento = '',salario = 0,preferencias=''):
+class Cliente(Pessoa):
+    def __init__(self,nome = '', cpf = 0 ,data_nascimento = '',salario = 0,preferencias=''):
        super().__init__(nome = '', cpf = 0 ,data_nascimento = '',salario = 0)
 
-class Livro(object):
+class Relatorio(Obra):
+    def __init__(self, titulo = None, lingua = None, ano = None, autores = []):
+        super().__init__(titulo = None, lingua = None, ano = None, autores = [])
+class Livro(Obra):
     isbn = None
-    titulo = None #titulo
-    lingua = None
-    ano = None
-    autores = []
-
     def __init__(self, isbn, titulo = None, lingua = None, ano = None, autores = []):
+        super().__init__(titulo = None, lingua = None, ano = None, autores = [])
         self.isbn = isbn
-        self.titulo = titulo
-        self.lingua = lingua
-        self.ano = ano
-        self.autores = autores
-    def exibir(self):
-        print("ISBN: ",self.isbn)
         print("titulo: ",self.titulo)
         print("Lingua: ",self.lingua)
         print("Ano de lançamento", self.ano)
@@ -44,18 +54,13 @@ class Livro(object):
             for x in range(len(self.autores)):
                   print("CPF do autor ",x ," ",self.autores[x])
 
-class Autor(object):
-    nome = None
-    cpf = None
-    data_nascimento = None
+class Autor(Pessoa):
     pais_nascimento = None
     nota_biografica = None
     livros = []
 
     def __init__(self, cpf, nome = None, data_nascimento = None, pais_nascimento = None, nota_biografica = None, livros = []):
-        self.nome = nome
-        self.cpf = cpf
-        self.data_nascimento = data_nascimento
+        super().__init__(cpf, nome = None, data_nascimento = None)
         self.pais_nascimento = pais_nascimento
         self.nota_biografica = nota_biografica
         self.livros = livros
@@ -97,11 +102,11 @@ while True:
                 print("Autor já cadastrado")
                 break        
         else:
-            titulo = input("titulo: ")
+            nome = input("nome: ")
             data_nascimento = input("Data nascimento: ")
             pais_nascimento = input("País de nascimento: ")
             nota_biografica = input("Nota biográfica: ")
-            autor = Autor(cpf, titulo, data_nascimento, pais_nascimento, nota_biografica)
+            autor = Autor(cpf, nome, data_nascimento, pais_nascimento, nota_biografica)
             autores.append(autor)
     elif(opcao == 2):
         print("++Exibir Autor++")
